@@ -8,7 +8,7 @@ using namespace std;
 
 void mousePoints(int,int,int,int,void*);
 void callBackFunc(int,int,int,int,void*);
-int mouseX, mouseY, clearFlag, clickFlag;
+int mouseX, mouseY, clearFlag, clickFlag, delayX, delayY;
 
 
 void mousePoints(int event, int x, int y, int flags, void* param)
@@ -21,6 +21,9 @@ void mousePoints(int event, int x, int y, int flags, void* param)
     {
     	mouseX = x;
     	mouseY = y;
+    	waitKey(10);
+    	delayX = x;
+    	delayY = y;
     }
     if(event == EVENT_LBUTTONUP)
     {
@@ -60,11 +63,12 @@ int main()
 			img.copyTo(imgCopy);
 		}
 		else if(clickFlag == 1) {
-			circle(imgCopy, Point(mouseX, mouseY), size, Scalar(bVal, gVal, rVal), FILLED);
+			//circle(imgCopy, Point(mouseX, mouseY), size, Scalar(bVal, gVal, rVal), FILLED);
+			line(imgCopy, Point(mouseX, mouseY), Point(delayX, delayY), Scalar(bVal, gVal, rVal), size);
 		}
 		clearFlag = 0;
 		imshow("img", imgCopy);
-		key = waitKey(1);
+		key = waitKey(25);
 	}
   	return 0;
 }
